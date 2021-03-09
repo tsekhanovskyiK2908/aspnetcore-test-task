@@ -13,7 +13,7 @@ export class OrderViewComponent implements OnInit {
   constructor(private orderApiService: OrderApiService) { }
 
   ngOnInit(): void {
-    this.orderApiService.getOrders
+    this.orderApiService.getOrders();
   }
 
 }
