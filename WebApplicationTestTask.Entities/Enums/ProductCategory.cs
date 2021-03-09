@@ -6,7 +6,7 @@ namespace WebApplicationTestTask.Entities.Enums
 {
     public enum ProductCategory
     {
-        Foods,
+        Foods = 1,
         Clothes,
         Appliance
     }

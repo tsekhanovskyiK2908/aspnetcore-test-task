@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplicationTestTask.Bl.Abstraction\WebApplicationTestTask.Bl.Abstraction.csproj" />
+    <ProjectReference Include="..\WebApplicationTestTask.Dal.Abstraction\WebApplicationTestTask.Dal.Abstraction.csproj" />
+    <ProjectReference Include="..\WebApplicationTestTask.Mappers.Abstraction\WebApplicationTestTask.Mappers.Abstraction.csproj" />
+  </ItemGroup>
+
+</Project>

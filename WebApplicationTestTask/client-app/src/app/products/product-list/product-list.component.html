@@ -1,0 +1,28 @@
+<div class="component-header margin-bottom-medium">
+    <p class="component-caption align-vertical">Products</p>
+    <a class="align-vertical" [routerLink]="['/products/create/']"><button class="navigation-link navigation-link-medium">New Product</button></a>
+</div>
+<div class="table-wrapper margin-bottom-small">
+    <table class="margin-bottom-very-big">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product name</th>
+                <th>Product category</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td><a [routerLink]="['/products/view/', product.id]">{{product.id}}</a></td>
+                <td>{{product.name}}</td>
+                <td>{{product.productCategory}}</td>
+                <td>{{product.avaliableQuantity}}</td>
+                <td>{{product.price}}</td>
+                <td><a (click)="deleteProduct(product)">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

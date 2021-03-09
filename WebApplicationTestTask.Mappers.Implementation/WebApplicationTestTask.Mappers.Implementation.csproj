@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplicationTestTask.Entities\WebApplicationTestTask.Entities.csproj" />
+    <ProjectReference Include="..\WebApplicationTestTask.Mappers.Abstraction\WebApplicationTestTask.Mappers.Abstraction.csproj" />
+    <ProjectReference Include="..\WebApplicationTestTask.Models\WebApplicationTestTask.Models.csproj" />
+  </ItemGroup>
+
+</Project>

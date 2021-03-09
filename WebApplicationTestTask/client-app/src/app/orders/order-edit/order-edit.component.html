@@ -1,0 +1,41 @@
+<div class="component-header margin-bottom-medium">
+    <p class="component-caption align-vertical">New Order</p>
+  </div>
+  <form  [formGroup]="orderForm" (ngSubmit)="saveOrder()">
+    <div class="controls-row">
+      <div class="group-input">
+        <label>Order Number: </label>
+        <input value={{orderId}}>
+      </div>
+      <div class="group-input">
+        <label>Order Date: </label>
+        <input value="{{orderDate | date:'shortDate'}}" disabled>
+      </div>
+    </div>
+    <div class="group-input">
+      <label>Customer: </label>
+      <select formControlName="customer">
+        <option *ngFor="let customer of customers" [ngValue]="customer.id">{{customer.name}}</option>
+      </select>
+    </div>
+    <div class="group-input">
+      <label>Order Status:</label>
+      <select formControlName="status">
+        <option *ngFor="let statusKey of orderStatusKeys" [ngValue]="statusKey">{{orderStatuses[statusKey]}}</option>
+      </select>
+    </div>
+    <div class="group-input">
+      <label>Total Cost:</label>
+      <input disabled>
+    </div>
+    <div class="group-textarea">
+        <label>Comment:</label>
+        <textarea formControlName="comment"></textarea>
+      </div>   
+    <div class="button-group-wrapper">
+      <div class="button-group">
+        <a class="align-vertical"><button type="submit" class="navigation-link navigation-link-small" [disabled]="!orderForm.valid">Save</button></a>
+        <a class="align-vertical" [routerLink]="['/products']"><button class="navigation-link navigation-link-small">Cancel</button></a>
+      </div>
+    </div>
+  </form>

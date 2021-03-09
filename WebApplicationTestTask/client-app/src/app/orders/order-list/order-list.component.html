@@ -1,0 +1,26 @@
+<div class="component-header margin-bottom-medium">
+    <p class="component-caption align-vertical">Orders</p>
+    <a class="align-vertical" [routerLink]="['/orders/create/']"><button class="navigation-link navigation-link-medium">New Order</button></a>
+</div>
+<div class="table-wrapper margin-bottom-small">
+    <table class="margin-bottom-very-big">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Customer Name</th>
+                <th>Customer Address</th>
+                <th>Total Cost</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td><a [routerLink]="['/orders/view/', order.id]">{{order.id}}</a></td>
+                <td>{{order.customerName}}</td>
+                <td>{{order.customerAddress}}</td>
+                <td>{{order.totalCost}}</td>
+                <td>{{order.orderStatus}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -19,6 +19,8 @@ namespace WebApplicationTestTask.Entities
         public int CustomerId { get; set; }
         [Required]
         public OrderStatus OrderStatus { get; set; }
+        public decimal TotalCost { get; set; }
+        public string Comment { get; set; }
         public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

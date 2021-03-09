@@ -6,7 +6,7 @@ namespace WebApplicationTestTask.Entities.Enums
 {
     public enum OrderStatus
     {
-        New,
+        New = 1,
         Paid,
         Shipped,
         Delivered,

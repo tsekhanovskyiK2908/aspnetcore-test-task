@@ -1,0 +1,31 @@
+<div class="component-header margin-bottom-medium">
+    <p class="component-caption align-vertical">New Order</p>
+  </div>
+  <form">
+    <div class="controls-row">
+      <div class="group-input">
+        <label>Order Number: </label>
+        <label></label>
+      </div>
+      <div class="group-input">
+        <label>Order Date: </label>
+        <label>{{orderDate | date:'shortDate'}}</label>
+      </div>
+    </div>
+    <div class="group-input">
+      <label>Customer: </label>
+      <label></label>
+    </div>
+    <div class="group-input">
+      <label>Order Status:</label>
+      <label></label>
+    </div>
+    <div class="group-input">
+      <label>Total Cost:</label>
+      <label></label>
+    </div>
+    <div class="group-textarea">
+        <label>Comment:</label>
+        <textarea formControlName="comment" disabled></textarea>
+      </div>       
+  </form>

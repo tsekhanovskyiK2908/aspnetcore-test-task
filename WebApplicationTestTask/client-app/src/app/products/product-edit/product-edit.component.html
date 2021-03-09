@@ -1,0 +1,43 @@
+<div class="component-header margin-bottom-medium">
+  <p class="component-caption align-vertical">New Product</p>
+</div>
+<form  [formGroup]="productForm" (ngSubmit)="saveProduct()">
+  <div class="controls-row">
+    <div class="group-input">
+      <label>Product Number: </label>
+      <input formControlName="id">
+    </div>
+    <div class="group-input">
+      <label>Created Date: </label>
+      <input value="{{productCreatedDate | date:'shortDate'}}" disabled>
+    </div>
+  </div>
+  <div class="group-input">
+    <label>Name: </label>
+    <input formControlName="name">
+  </div>
+  <div class="group-input">
+    <label>Product Category:</label>
+    <select formControlName="productCategory">
+      <option *ngFor="let categoryKey of categoriesKeys" [ngValue]="categoryKey">{{categories[categoryKey]}}</option>
+    </select>
+  </div>
+  <div class="group-input">
+    <label>Avaliable Quantity:</label>
+    <input formControlName="avaliableQuantity">
+  </div>
+  <div class="group-input">
+    <label>Price:</label>
+    <input formControlName="price">
+  </div>
+  <div class="group-textarea">
+    <label>Description:</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+  <div class="button-group-wrapper">
+    <div class="button-group">
+      <a class="align-vertical"><button type="submit" class="navigation-link navigation-link-small" [disabled]="!productForm.valid">Save</button></a>
+      <a class="align-vertical" [routerLink]="['/products']"><button class="navigation-link navigation-link-small">Cancel</button></a>
+    </div>
+  </div>
+</form>

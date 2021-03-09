@@ -1,0 +1,23 @@
+<div class="component-header margin-bottom-medium">
+    <p class="component-caption align-vertical">New Customer</p>
+  </div>
+  <form [formGroup]="customerForm" (ngSubmit)="saveCustomer()">
+    <div class="group-input">
+        <label>Created Date: </label>
+        <input value="{{customerCreatedDate | date:'shortDate'}}" disabled>
+    </div>
+    <div class="group-input">
+        <label>Customer Name: </label>
+        <input formControlName="name">
+    </div>    
+    <div class="group-textarea">
+        <label>Address:</label>
+        <textarea formControlName="address"></textarea>
+    </div>
+    <div class="button-group-wrapper">
+      <div class="button-group">
+        <a class="align-vertical"><button type="submit" class="navigation-link navigation-link-small" [disabled]="!customerForm.valid">Save</button></a>
+        <a class="align-vertical" [routerLink]="['/customers']"><button class="navigation-link navigation-link-small">Cancel</button></a>
+      </div>
+    </div>
+  </form>
