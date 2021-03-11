@@ -1,7 +1,7 @@
 <div class="component-header margin-bottom-medium">
     <p class="component-caption align-vertical">New Order</p>
   </div>
-  <form">
+  <form>
     <div class="controls-row">
       <div class="group-input">
         <label>Order Number: </label>
@@ -9,7 +9,7 @@
       </div>
       <div class="group-input">
         <label>Order Date: </label>
-        <label>{{orderDate | date:'shortDate'}}</label>
+        <!-- <label>{{orderDate | date:'shortDate'}}</label> -->
       </div>
     </div>
     <div class="group-input">
@@ -27,5 +27,5 @@
     <div class="group-textarea">
         <label>Comment:</label>
         <textarea formControlName="comment" disabled></textarea>
-      </div>       
+    </div>       
   </form>
