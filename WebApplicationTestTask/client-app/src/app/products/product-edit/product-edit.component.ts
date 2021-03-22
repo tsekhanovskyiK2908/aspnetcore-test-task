@@ -41,7 +41,7 @@ export class ProductEditComponent implements OnInit {
     this.productForm = new FormGroup({
       id: new FormControl({value: '', disabled: true}),
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
-      productCategory: new FormControl('', [Validators.required]),
+      productCategory: new FormControl('', [Validators.required, Validators.min(1)]),
       avaliableQuantity: new FormControl('', [Validators.required, Validators.min(0)]),
       price: new FormControl('', [Validators.required, Validators.min(0.01)]),
       description: new FormControl('')
@@ -72,10 +72,27 @@ export class ProductEditComponent implements OnInit {
       })
     } else {
       this.productModel = this.productForm.value;
+      this.productModel.id = this.productId;
       this.productApiService.updateProduct(this.productId, this.productModel).subscribe(r => {      
       });
     }
 
     this.router.navigate(['products']);
+  }
+
+  get name() {
+    return this.productForm.get('name');
+  }
+
+  get productCategory() {
+    return this.productForm.get('productCategory');
+  }
+
+  get avaliableQuantity() {
+    return this.productForm.get('avaliableQuantity');
+  }
+
+  get price() {
+    return this.productForm.get('price');
   }
 }

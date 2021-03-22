@@ -103,37 +103,43 @@ namespace WebApplicationTestTask.Dal.Implementation.Seed
             {
                 OrderId = 1,
                 ProductId = 1,
-                Quantity = 5
+                Quantity = 5,
+                Price = 100m
             },
             new OrderProduct
             {
                 OrderId = 1,
                 ProductId = 2,
-                Quantity = 2
+                Quantity = 2,
+                Price = 400m
             },
             new OrderProduct
             {
                 OrderId = 2,
                 ProductId = 2,
-                Quantity = 1
+                Quantity = 1,
+                Price = 200m
             },
             new OrderProduct
             {
                 OrderId = 2,
                 ProductId = 3,
-                Quantity = 1
+                Quantity = 1,
+                Price = 150m
             },
             new OrderProduct
             {
                 OrderId = 3,
                 ProductId = 1,
-                Quantity = 3
+                Quantity = 3,
+                Price = 60m
             },
             new OrderProduct
             {
                 OrderId = 3,
                 ProductId = 3,
-                Quantity = 1
+                Quantity = 1,
+                Price = 150m
             },
         };
     }

@@ -8,6 +8,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductViewComponent } from './product-view/product-view.component';
+import { OrderApiService } from '../orders/api/order-api-service';
+import { SharedModule } from '../shared/shared.module';
 
 const productRoutes: Routes = [
   {path: 'products', component: ProductListComponent},
@@ -22,8 +24,10 @@ const productRoutes: Routes = [
     CommonModule,
     HttpClientModule,
     RouterModule.forChild(productRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
-  providers: [ProductsApiService]
+  providers: [ProductsApiService, OrderApiService],
+  exports: []
 })
 export class ProductsModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderApiService } from '../api/order-api-service';
 import { OrderPresentationModel } from '../models/order-presentation-model';
 
@@ -9,11 +10,26 @@ import { OrderPresentationModel } from '../models/order-presentation-model';
 })
 export class OrderViewComponent implements OnInit {
 
-  orderPresentationModel: OrderPresentationModel;
-  constructor(private orderApiService: OrderApiService) { }
+  orderModel: OrderPresentationModel;
+  orderModelDate: number;
+  orderId: number;
+
+  constructor(private orderApiService: OrderApiService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.orderApiService.getOrders();
+    this.orderModelDate = Date.now();
+    this.orderId = +(this.route.snapshot.params['id']);
+
+    if(isNaN(this.orderId)){
+      this.router.navigate(['/orders']);
+    }
+
+    this.orderApiService.getOrderById(this.orderId).subscribe(dr => {
+      this.orderModel = dr.data
+      console.log(this.orderModel);
+    });
   }
 
 }

@@ -16,7 +16,7 @@
             <tr *ngFor="let customer of customers">
                 <td>{{customer.name}}</td>
                 <td>{{customer.address}}</td>
-                <td>{{customer.totalOrderedCost}}</td>
+                <td>{{customer.totalOrderedCost | currency:"UAH ":"symbol"}}</td>
                 <td>{{customer.ordersCount}}</td>
             </tr>
         </tbody>

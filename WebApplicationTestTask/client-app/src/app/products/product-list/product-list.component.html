@@ -18,7 +18,7 @@
             <tr *ngFor="let product of products">
                 <td><a [routerLink]="['/products/view/', product.id]">{{product.id}}</a></td>
                 <td>{{product.name}}</td>
-                <td>{{product.productCategory}}</td>
+                <td>{{product.productCategory | productCategory}}</td>
                 <td>{{product.avaliableQuantity}}</td>
                 <td>{{product.price}}</td>
                 <td><a (click)="deleteProduct(product)">Delete</a></td>

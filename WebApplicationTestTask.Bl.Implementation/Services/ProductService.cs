@@ -16,11 +16,14 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
     {
         private readonly IProductRepository _productRepository;
         private readonly IProductMapper _productMapper;
+        private readonly IOrderProductRepository _orderProductRepository;
         public ProductService(IProductRepository productRepository, 
-            IProductMapper productMapper)
+            IProductMapper productMapper,
+            IOrderProductRepository orderProductRepository)
         {
             _productRepository = productRepository;
             _productMapper = productMapper;
+            _orderProductRepository = orderProductRepository;
         }
         public async Task<DataResult<Product>> CreateProductAsync(ProductCreationModel productModel)
         {
@@ -49,7 +52,18 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                 };
             }
 
-            await _productRepository.DeleteAsync(productToDelete);
+            List<OrderProduct> orderProducts = await _orderProductRepository.GetOrderProductsOfProduct(productId);
+
+            if (orderProducts.Any())
+            {
+                return new Result
+                {
+                    ResponseMessageType = ResponseMessageType.Error,
+                    MessageDetails = "Product is used in some orders"
+                };
+            }
+
+                await _productRepository.DeleteAsync(productToDelete);
             await _productRepository.SaveAsync();
 
             return new Result

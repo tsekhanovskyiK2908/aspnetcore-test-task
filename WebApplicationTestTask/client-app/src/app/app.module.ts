@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
+import { OrderStateService } from './orders/state/order-state-service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,11 @@ import { OrdersModule } from './orders/orders.module';
     HttpClientModule,
     ProductsModule,
     CustomersModule,
-    OrdersModule
+    OrdersModule,
+    BrowserAnimationsModule,
+    // SharedModule
   ],
-  providers: [],
+  providers: [OrderStateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

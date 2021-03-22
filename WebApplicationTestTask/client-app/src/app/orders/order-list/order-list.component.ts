@@ -16,7 +16,7 @@ export class OrderListComponent implements OnInit {
     setTimeout(() => {
       this.orderApiService.getOrders().subscribe(dr => {
         this.orders = dr.data;
-      }),100
+      }),1000
     });
   }
 

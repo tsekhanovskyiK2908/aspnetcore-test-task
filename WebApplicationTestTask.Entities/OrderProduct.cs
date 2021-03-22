@@ -18,5 +18,6 @@ namespace WebApplicationTestTask.Entities
         public int Quantity { get; set; }
         [Required]
         public ProductSize ProductSize { get; set; }
+        public decimal Price { get; set; }
     }
 }

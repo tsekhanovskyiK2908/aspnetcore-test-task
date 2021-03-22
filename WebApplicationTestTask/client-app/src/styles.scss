@@ -69,6 +69,11 @@ h1 {
     font-weight: 700;
 }
 
+.navigation-link:focus {
+    outline: none;
+    border-radius: 1rem;
+}
+
 .navigation-link-big {
     width: 19rem;
     height: 6rem;
@@ -95,16 +100,15 @@ h1 {
     }
 }
 
+.navigation-link-active {
+    background-color: whitesmoke;
+}
+
 .component-wrapper {
     border: .2rem solid black;
     border-radius: 1rem;
     margin: 0 auto;
-    padding: 1.2rem 2.8rem;
-
-    .component-header {
-        display: flex;
-        justify-content: space-between;
-    }
+    padding: 1.2rem 2.8rem;    
 
     .component-caption {
         color: $color-indigo;
@@ -112,6 +116,17 @@ h1 {
         margin: 0;     
         font-size: 2rem;
     }
+}
+
+.component-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-component-caption {
+    font-style: italic;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .table-wrapper {
@@ -127,6 +142,11 @@ table {
     margin: 0;
     padding: 0;
     border: 0;
+}
+
+.table-bordered {
+    border: 1px solid black;
+    border-radius: .5rem;
 }
 
 table {
@@ -209,7 +229,12 @@ table {
         border: .2rem solid black;
         border-radius: .5rem;
         height: 3rem;
+        width: 16rem;
     }
+
+    .validation-failure {
+        border: .2rem solid red;
+    }    
 }
 
 .group-textarea {
@@ -231,7 +256,12 @@ table {
         width:  28rem;
         height: 15rem;
     }
+
+    .validation-failure {
+        border: .2rem solid red;
+    }    
 }
+
 
 .button-group-wrapper {
     display: flex;
@@ -242,4 +272,25 @@ table {
         justify-content: space-between;
         width: 25%;    
     }    
+}
+html, body { height: 100%; }
+
+.justify-space-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.dialog-text {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.dialog-wrapper {
+    margin: 0 2rem;
+    width: 30rem;
+    height: 15rem;
 }

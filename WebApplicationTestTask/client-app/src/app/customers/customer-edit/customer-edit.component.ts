@@ -35,4 +35,12 @@ export class CustomerEditComponent implements OnInit {
     this.router.navigate(['/customers']);
   }
 
+  get name() {
+    return this.customerForm.get('name');
+  }
+
+  get address() {
+    return this.customerForm.get('address');
+  }
+
 }

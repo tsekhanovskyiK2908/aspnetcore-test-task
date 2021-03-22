@@ -17,12 +17,15 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerMapper _customerMapper;
+        private readonly IOrderRepository _orderRepository;
 
         public CustomerService(ICustomerRepository customerRepository,
-            ICustomerMapper customerMapper)
+            ICustomerMapper customerMapper,
+            IOrderRepository orderRepository)
         {
             _customerRepository = customerRepository;
             _customerMapper = customerMapper;
+            _orderRepository = orderRepository;
         }
         public async Task<DataResult<CustomerModel>> CreateCustomer(CustomerCreationModel customerCreationModel)
         {
@@ -43,9 +46,7 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
 
         public async Task<DataResult<List<CustomerModel>>> GetAllCustomers()
         {
-            List<Customer> customers = await _customerRepository.GetAllAsync();
-
-            List<CustomerModel> customerModels = customers.Select(_customerMapper.MapToModel).ToList();
+            List<CustomerModel> customerModels = await _customerRepository.GetCustomerModels();
 
             return new DataResult<List<CustomerModel>>
             {
@@ -56,9 +57,9 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
 
         public async Task<DataResult<CustomerModel>> GetCustomer(int customerId)
         {
-            Customer customer = await _customerRepository.GetByIdAsync(customerId);
+            CustomerModel customerModel = await _customerRepository.GetCustomerModel(customerId);
 
-            if(customer == null)
+            if (customerModel == null)
             {
                 return new DataResult<CustomerModel>
                 {
@@ -66,8 +67,6 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                     ResponseMessageType = ResponseMessageType.Error
                 };
             }
-
-            CustomerModel customerModel = _customerMapper.MapToModel(customer);
 
             return new DataResult<CustomerModel>
             {

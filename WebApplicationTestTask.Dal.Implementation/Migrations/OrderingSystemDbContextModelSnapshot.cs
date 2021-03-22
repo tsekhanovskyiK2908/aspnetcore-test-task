@@ -134,6 +134,10 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("ProductSize")
                         .HasColumnType("int");
 
@@ -151,6 +155,7 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                         {
                             OrderId = 1,
                             ProductId = 1,
+                            Price = 100m,
                             ProductSize = 0,
                             Quantity = 5
                         },
@@ -158,6 +163,7 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                         {
                             OrderId = 1,
                             ProductId = 2,
+                            Price = 400m,
                             ProductSize = 0,
                             Quantity = 2
                         },
@@ -165,6 +171,7 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                         {
                             OrderId = 2,
                             ProductId = 2,
+                            Price = 200m,
                             ProductSize = 0,
                             Quantity = 1
                         },
@@ -172,6 +179,7 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                         {
                             OrderId = 2,
                             ProductId = 3,
+                            Price = 150m,
                             ProductSize = 0,
                             Quantity = 1
                         },
@@ -179,6 +187,7 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                         {
                             OrderId = 3,
                             ProductId = 1,
+                            Price = 60m,
                             ProductSize = 0,
                             Quantity = 3
                         },
@@ -186,6 +195,7 @@ namespace WebApplicationTestTask.Dal.Implementation.Migrations
                         {
                             OrderId = 3,
                             ProductId = 3,
+                            Price = 150m,
                             ProductSize = 0,
                             Quantity = 1
                         });

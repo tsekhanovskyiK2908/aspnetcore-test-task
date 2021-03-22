@@ -1,0 +1,36 @@
+<div class="component-header margin-bottom-medium">
+  <p class="component-caption align-vertical">Add Product To Order #{{orderId}}</p>
+</div>
+<form [formGroup]="addProductForm">
+  <div class="group-input">
+    <label>Product Number: </label>
+    <label *ngIf="selectedProductModel!== undefined">{{selectedProductModel.id}}</label>
+  </div>
+  <div class="group-input">
+    <label>Product Name:</label>
+    <select #productSelect (change)="onSelectedProductChange(productSelect.value)" formControlName="productId"
+                            [ngClass]="{'validation-failure': productId.invalid && (productId.dirty || productId.touched) 
+                                                                    && (productId.errors.required || productId.errors.min)}">
+      <option [value]=0 selected>Select Product</option>
+      <option *ngFor="let productModel of productModels" 
+        [value]="productModel.id">{{productModel.name}}</option>
+    </select>
+  </div>
+  <div class="group-input">
+    <label>Product Category:</label>
+    <label *ngIf="selectedProductModel!== undefined">{{selectedProductModel.productCategory | productCategory}}</label>
+  </div>
+  <div class="group-input">
+    <label>Quantity:</label>
+    <input formControlName="quantity"
+                    [ngClass]="{'validation-failure': quantity.invalid && (quantity.dirty || quantity.touched) 
+                                                                      && (quantity.errors.min || quantity.errors.required)}">
+  </div>
+  <div class="button-group-wrapper">
+    <div class="button-group">
+      <a class="align-vertical"><button type="button" class="navigation-link navigation-link-small" [disabled]="!addProductForm.valid" (click)="addProductToOrder()">Save</button></a>
+      <a class="align-vertical" (click)="backToEditPage()" ><button
+          class="navigation-link navigation-link-small">Cancel</button></a>
+    </div>
+  </div>
+</form>

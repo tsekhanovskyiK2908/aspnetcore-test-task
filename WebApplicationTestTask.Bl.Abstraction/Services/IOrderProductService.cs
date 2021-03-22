@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WebApplicationTestTask.Bl.Abstraction.Services
 {
-    public interface IOrderProductRepository
+    public interface IOrderProductService
     {
 
     }

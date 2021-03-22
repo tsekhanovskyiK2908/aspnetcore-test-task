@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace WebApplicationTestTask.Dal.Abstraction
         Task<List<TEntity>> GetAllAsync();
         Task SaveAsync();
         Task<int> GetCount();
+        Task<IDbContextTransaction> BeginTransactionAsync();
     }
 }

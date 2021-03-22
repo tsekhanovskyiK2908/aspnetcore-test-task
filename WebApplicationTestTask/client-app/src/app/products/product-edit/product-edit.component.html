@@ -14,21 +14,29 @@
   </div>
   <div class="group-input">
     <label>Name: </label>
-    <input formControlName="name">
+    <input formControlName="name"
+                [ngClass]="{'validation-failure': name.invalid && (name.dirty || name.touched) 
+                                                  && (name.errors.required || name.errors.minlength || name.errors.maxlength)}">
   </div>
   <div class="group-input">
     <label>Product Category:</label>
-    <select formControlName="productCategory">
-      <option *ngFor="let categoryKey of categoriesKeys" [ngValue]="categoryKey">{{categories[categoryKey]}}</option>
+    <select formControlName="productCategory"
+                [ngClass]="{'validation-failure':productCategory.invalid && (productCategory.dirty || productCategory.touched) 
+                                                                        && (productCategory.errors.required || productCategory.errors.min)}">
+      <option *ngFor="let categoryKey of categoriesKeys" [value]="categoryKey">{{categories[categoryKey]}}</option>
     </select>
   </div>
   <div class="group-input">
     <label>Avaliable Quantity:</label>
-    <input formControlName="avaliableQuantity">
+    <input formControlName="avaliableQuantity"
+                  [ngClass]="{'validation-failure': avaliableQuantity.invalid && (avaliableQuantity.dirty || avaliableQuantity.touched) 
+                                                          && (avaliableQuantity.errors.required || avaliableQuantity.errors.min)}">
   </div>
   <div class="group-input">
     <label>Price:</label>
-    <input formControlName="price">
+    <input formControlName="price"
+                  [ngClass]="{'validation-failure': price.invalid && (price.dirty || price.touched) && 
+                                                                (price.errors.required || price.errors.min)}">
   </div>
   <div class="group-textarea">
     <label>Description:</label>

@@ -12,6 +12,7 @@ namespace WebApplicationTestTask.Models.OrderProduct
         public ProductCategory ProductCategory { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+        public decimal ProductPrice { get; set; }
         public ProductSize ProductSize { get; set; }
 
     }

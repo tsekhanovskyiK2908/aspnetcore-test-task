@@ -19,5 +19,6 @@ namespace WebApplicationTestTask.Entities
         [Required]
         [MaxLength(75)]
         public string Address { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

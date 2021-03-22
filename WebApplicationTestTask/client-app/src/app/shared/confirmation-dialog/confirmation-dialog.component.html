@@ -1,0 +1,9 @@
+<div class="dialog-wrapper">
+    <div mat-dialog-content>
+        <p class="dialog-text margin-bottom-small">{{data.message}}</p>
+      </div>
+      <div mat-dialog-actions class="button-group justify-space-between">
+        <button mat-button class="navigation-link navigation-link-small" [mat-dialog-close]="true">Yes</button>
+        <button mat-button class="navigation-link navigation-link-small" [mat-dialog-close]="false" cdkFocusInitial>No</button>
+      </div>
+</div>

@@ -1,41 +1,71 @@
 <div class="component-header margin-bottom-medium">
     <p class="component-caption align-vertical">New Order</p>
   </div>
-  <form  [formGroup]="orderForm" (ngSubmit)="saveOrder()">
+  <form [formGroup]="orderForm" (ngSubmit)="saveOrder()">
     <div class="controls-row">
       <div class="group-input">
         <label>Order Number: </label>
-        <input value={{orderId}}>
+        <input value={{orderId}} disabled>
       </div>
       <div class="group-input">
         <label>Order Date: </label>
-        <input value="{{orderDate | date:'shortDate'}}" disabled>
+        <input value="{{orderCreatedDate | date:'shortDate'}}" disabled>
       </div>
     </div>
     <div class="group-input">
       <label>Customer: </label>
-      <select formControlName="customer">
-        <option *ngFor="let customer of customers" [ngValue]="customer.id">{{customer.name}}</option>
+      <select formControlName="customerId" 
+                    [ngClass]="{'validation-failure': customerId.invalid && (customerId.dirty || customerId.touched) 
+                                                                    && (customerId.errors.required || customerId.errors.min)}">
+        <option [value]=0 [selected]="true">Select Customer</option>
+        <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
       </select>
     </div>
     <div class="group-input">
       <label>Order Status:</label>
-      <select formControlName="status">
-        <option *ngFor="let statusKey of orderStatusKeys" [ngValue]="statusKey">{{orderStatuses[statusKey]}}</option>
+      <select formControlName="orderStatus"
+                    [ngClass]="{'validation-failure': orderStatus.invalid && (orderStatus.dirty || orderStatus.touched) 
+                                                                          && (orderStatus.errors.required || orderStatus.errors.min)}">
+        <option [value]="0" [selected]="true">Select Order Status</option>
+        <option *ngFor="let statusKey of orderStatusKeys" [value]="statusKey">{{orderStatuses[statusKey]}}</option>
       </select>
     </div>
     <div class="group-input">
       <label>Total Cost:</label>
-      <input disabled>
+      <input value={{totalCost}} disabled>
     </div>
+    <div class="component-header margin-bottom-small">
+      <p class="sub-component-caption align-vertical">Add Products:</p>
+      <a class="align-vertical"><button type="button" class="navigation-link navigation-link-small" [disabled]="!orderForm.valid" (click)="navigateToAddProducts()">Add Products To Order</button></a>
+    </div>
+    <table class="table-bordered margin-bottom-medium">
+      <thead>
+        <tr>
+          <th>Product Id</th>
+          <th>Product Name</th>
+          <th>Product Category</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let orderProductModel of orderProductModels">
+          <td><a>{{orderProductModel.productId}}</a></td>
+          <td>{{orderProductModel.productName}}</td>
+          <td>{{orderProductModel.productCategory | productCategory}}</td>
+          <td>{{orderProductModel.quantity}}</td>
+          <td>{{orderProductModel.price}}</td>
+        </tr>
+      </tbody>
+    </table>
     <div class="group-textarea">
         <label>Comment:</label>
         <textarea formControlName="comment"></textarea>
       </div>   
     <div class="button-group-wrapper">
       <div class="button-group">
-        <a class="align-vertical"><button type="submit" class="navigation-link navigation-link-small" [disabled]="!orderForm.valid">Save</button></a>
-        <a class="align-vertical" [routerLink]="['/products']"><button class="navigation-link navigation-link-small">Cancel</button></a>
+        <a class="align-vertical"><button type="submit" class="navigation-link navigation-link-small" [disabled]="!orderForm.valid || orderProductModels.length === 0 || orderProductModels === undefined">Save</button></a>
+        <a class="align-vertical"><button type="button" class="navigation-link navigation-link-small" (click)="cancelEditingOrder()">Cancel</button></a>
       </div>
     </div>
   </form>

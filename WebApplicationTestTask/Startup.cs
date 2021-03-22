@@ -15,6 +15,8 @@ using WebApplicationTestTask.Bl.Implementation;
 using WebApplicationTestTask.Dal.Implementation;
 using WebApplicationTestTask.Mappers.Implementation;
 using Newtonsoft.Json.Converters;
+using System.Reflection;
+using System.IO;
 
 namespace WebApplicationTestTask
 {
@@ -37,6 +39,23 @@ namespace WebApplicationTestTask
 
             services.AddDbContext<OrderingSystemDbContext>(options =>
                 options.UseSqlServer(connectionString, builder => builder.MigrationsAssembly("WebApplicationTestTask.Dal.Implementation")));
+
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("WebPortalAPI",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "Web Portal API",
+                        Version = "1"
+                    });
+                setupAction.UseOneOfForPolymorphism();
+                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+                setupAction.IncludeXmlComments(xmlCommentsFullPath);
+            });
+
+            services.AddSwaggerGenNewtonsoftSupport();
 
             DalDependencyInstaller.Install(services);
             MappersDependencyInstaller.Install(services);
@@ -64,6 +83,14 @@ namespace WebApplicationTestTask
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint("/swagger/WebPortalAPI/swagger.json", "Web Portal API v1");
+                setupAction.RoutePrefix = "";
+            });
 
             app.UseRouting();
 

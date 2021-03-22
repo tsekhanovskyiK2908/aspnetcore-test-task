@@ -1,31 +1,55 @@
 <div class="component-header margin-bottom-medium">
-    <p class="component-caption align-vertical">New Order</p>
+  <p class="component-caption align-vertical">View Order</p>
+  <a class="align-vertical" [routerLink]="['/orders/edit/', orderModel.id]"><button class="navigation-link navigation-link-medium">Edit</button></a>
+</div>
+<form>
+  <div class="controls-row">
+    <div class="group-input">
+      <label>Order Number: </label>
+      <label>{{orderModel.id}}</label>
+    </div>
+    <div class="group-input">
+      <label>Order Date: </label>
+      <label>{{orderModel.orderDate | date:'shortDate'}}</label>
+    </div>
   </div>
-  <form>
-    <div class="controls-row">
-      <div class="group-input">
-        <label>Order Number: </label>
-        <label></label>
-      </div>
-      <div class="group-input">
-        <label>Order Date: </label>
-        <!-- <label>{{orderDate | date:'shortDate'}}</label> -->
-      </div>
-    </div>
-    <div class="group-input">
-      <label>Customer: </label>
-      <label></label>
-    </div>
-    <div class="group-input">
-      <label>Order Status:</label>
-      <label></label>
-    </div>
-    <div class="group-input">
-      <label>Total Cost:</label>
-      <label></label>
-    </div>
-    <div class="group-textarea">
-        <label>Comment:</label>
-        <textarea formControlName="comment" disabled></textarea>
-    </div>       
-  </form>
+  <div class="group-input">
+    <label>Customer: </label>
+    <label>{{orderModel.customerName}}</label>
+  </div>
+  <div class="group-input">
+    <label>Order Status:</label>
+    <label>{{orderModel.orderStatus | orderStatus}}</label>
+  </div>
+  <div class="group-input">
+    <label>Total Cost:</label>
+    <label>{{orderModel.totalCost}}</label>
+  </div>
+  <div class="component-header margin-bottom-small">
+    <p class="sub-component-caption align-vertical">Order Products</p>
+  </div>
+  <table class="table-bordered margin-bottom-medium">
+    <thead>
+      <tr>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Product Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orderProduct of orderModel.orderProducts">
+        <td><a>{{orderProduct.productId}}</a></td>
+        <td>{{orderProduct.productName}}</td>
+        <td>{{orderProduct.productCategory | productCategory}}</td>
+        <td>{{orderProduct.quantity}}</td>
+        <td>{{orderProduct.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="group-textarea">
+    <label>Comment:</label>
+    <textarea disabled>{{orderModel.comment}}</textarea>
+  </div>
+</form>

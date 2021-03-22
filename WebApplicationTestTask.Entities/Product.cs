@@ -24,6 +24,7 @@ namespace WebApplicationTestTask.Entities
         public string Description { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
+        public ICollection<OrderProduct> OrderProducts { get; set; }
 
     }
 }
