@@ -21,18 +21,21 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
         private readonly IMapFromModel<OrderProductModel, OrderProduct> _orderProductMapper;
         private readonly IProductRepository _productRepository;
         private readonly IOrderProductRepository _orderProductRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public OrderService(IOrderRepository orderRepository, 
+        public OrderService(IOrderRepository orderRepository,
             IOrderMapper orderMapper,
             IMapFromModel<OrderProductModel, OrderProduct> orderProductMapper,
             IProductRepository productRepository,
-            IOrderProductRepository orderProductRepository)
+            IOrderProductRepository orderProductRepository,
+            ICustomerRepository customerRepository)
         {
             _orderRepository = orderRepository;
             _orderMapper = orderMapper;
             _orderProductMapper = orderProductMapper;
             _productRepository = productRepository;
             _orderProductRepository = orderProductRepository;
+            _customerRepository = customerRepository;
         }
 
         // Map model to order
@@ -42,11 +45,22 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
         // Set orderId to orderProducts
         // Insert orderProducts
         public async Task<DataResult<int>> CreateOrder(OrderCreationalModel orderCreationalModel)
-        {   
-            using(IDbContextTransaction transaction = await _orderRepository.BeginTransactionAsync())
+        {
+            using (IDbContextTransaction transaction = await _orderRepository.BeginTransactionAsync())
             {
                 try
                 {
+                    Customer orderCustomer = await _customerRepository.GetByIdAsync(orderCreationalModel.CustomerId);
+
+                    if (orderCustomer == null)
+                    {
+                        return new DataResult<int>
+                        {
+                            ResponseMessageType = ResponseMessageType.Error,
+                            MessageDetails = "Customer of order does not exists"
+                        };
+                    }
+
                     Order order = _orderMapper.MapBackToEntity(orderCreationalModel);
                     order.OrderDate = DateTime.UtcNow;
 
@@ -57,7 +71,7 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                     {
                         Result orderProductAddResult = await AddOrderProductAsync(order, orderProductModel);
 
-                        if(orderProductAddResult.ResponseMessageType == ResponseMessageType.Error)
+                        if (orderProductAddResult.ResponseMessageType == ResponseMessageType.Error)
                         {
                             await transaction.RollbackAsync();
 
@@ -65,7 +79,7 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                             {
                                 ResponseMessageType = ResponseMessageType.Error
                             };
-                        }    
+                        }
                     }
 
                     _orderRepository.Update(order);
@@ -89,15 +103,8 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
 
         public async Task<DataResult<List<OrderPresentationModel>>> GetAllOrders()
         {
-            //List<Order> orders = await _orderRepository.GetAllAsync();
-
-            //foreach (Order order in orders)
-            //{
-            //    ICollection<OrderProduct> orderProducts = order.OrderProducts;
-            //}
-
             List<OrderPresentationModel> orderPresentationModels = await _orderRepository.GetOrderPresentationModels();
-            
+
             return new DataResult<List<OrderPresentationModel>>
             {
                 Data = orderPresentationModels,
@@ -109,7 +116,7 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
         {
             OrderPresentationModel orderPresentationModel = await _orderRepository.GetOrderPresentationModel(orderId);
 
-            if(orderPresentationModel == null)
+            if (orderPresentationModel == null)
             {
                 return new DataResult<OrderPresentationModel>
                 {
@@ -132,12 +139,12 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
         {
             Order orderToUpdate = await _orderRepository.GetByIdAsync(orderUpdateModel.Id);
 
-            if(orderToUpdate == null)
+            if (orderToUpdate == null)
             {
                 return new DataResult<int>
                 {
                     ResponseMessageType = ResponseMessageType.Error,
-                    MessageDetails = "Order you tryung to update does not exist"
+                    MessageDetails = "Order you trying to update does not exist"
                 };
             }
 
@@ -145,14 +152,25 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
             {
                 try
                 {
+                    Customer orderCustomer = await _customerRepository.GetByIdAsync(orderUpdateModel.CustomerId);
+
+                    if (orderCustomer == null)
+                    {
+                        return new DataResult<int>
+                        {
+                            ResponseMessageType = ResponseMessageType.Error,
+                            MessageDetails = "Customer of order does not exists"
+                        };
+                    }
+
                     orderToUpdate = _orderMapper.MapBack(orderUpdateModel, orderToUpdate);
 
                     foreach (OrderProductModel orderProductModel in orderUpdateModel.OrderProductModels)
                     {
-                        OrderProduct orderProductToUpdate = 
+                        OrderProduct orderProductToUpdate =
                             await _orderProductRepository.GetOrderProductById(orderToUpdate.Id, orderProductModel.ProductId);
 
-                        if(orderProductToUpdate == null)
+                        if (orderProductToUpdate == null)
                         {
                             Result orderProductAddResult = await AddOrderProductAsync(orderToUpdate, orderProductModel);
 
@@ -184,26 +202,24 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                             int quantityDifference = orderProductModel.Quantity - orderProductToUpdate.Quantity;
                             decimal priceDifference = product.Price * quantityDifference;
 
-                            if(quantityDifference != 0)
+                            if (quantityDifference != 0)
                             {
-                                if (quantityDifference > 0)
+                                if (quantityDifference <= product.AvaliableQuantity)
                                 {
-                                    if (quantityDifference <= product.AvaliableQuantity)
-                                    {
-                                        orderProductToUpdate.Price += priceDifference;
-                                        orderProductToUpdate.Quantity = orderProductModel.Quantity;
-                                        orderToUpdate.TotalCost += priceDifference;
+                                    orderProductToUpdate.Price += priceDifference;
+                                    orderProductToUpdate.Quantity = orderProductModel.Quantity;
+                                    orderToUpdate.TotalCost += priceDifference;
 
-                                        _orderProductRepository.Update(orderProductToUpdate);
-                                    }
+                                    _orderProductRepository.Update(orderProductToUpdate);
                                 }
                                 else
                                 {
-                                    orderProductToUpdate.Price -= priceDifference;
-                                    orderProductToUpdate.Quantity = orderProductModel.Quantity;
-                                    orderToUpdate.TotalCost -= priceDifference;
+                                    await transaction.RollbackAsync();
 
-                                    _orderProductRepository.Update(orderProductToUpdate);
+                                    return new DataResult<int>
+                                    {
+                                        ResponseMessageType = ResponseMessageType.Error
+                                    };
                                 }
 
                                 _orderRepository.Update(orderToUpdate);
@@ -214,12 +230,6 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                                 await _productRepository.SaveAsync();
                             }
 
-                            //_orderRepository.Update(orderToUpdate);
-
-                            //product.AvaliableQuantity -= quantityDifference;
-                            //_productRepository.Update(product);
-
-                            //await _productRepository.SaveAsync();
                         }
                     }
 
@@ -262,12 +272,18 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                 await _orderProductRepository.AddAsync(orderProduct);
                 _productRepository.Update(product);
                 await _orderProductRepository.SaveAsync();
+
+                return new Result
+                {
+                    ResponseMessageType = ResponseMessageType.Success
+                };
             }
 
             return new Result
             {
-                ResponseMessageType = ResponseMessageType.Success
+                ResponseMessageType = ResponseMessageType.Error
             };
+
         }
     }
 }

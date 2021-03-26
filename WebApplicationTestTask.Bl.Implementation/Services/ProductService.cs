@@ -63,7 +63,7 @@ namespace WebApplicationTestTask.Bl.Implementation.Services
                 };
             }
 
-                await _productRepository.DeleteAsync(productToDelete);
+            await _productRepository.DeleteAsync(productToDelete);
             await _productRepository.SaveAsync();
 
             return new Result

@@ -31,17 +31,17 @@ namespace WebApplicationTestTask.Mappers.Implementation
         }
 
 
-        public OrderPresentationModel MapToModel(Order order, Customer customer)
-        {
-            return new OrderPresentationModel
-            {
-                Id = order.Id,
-                CustomerName = customer.Name,
-                CustomerAddress = customer.Address,
-                OrderStatus = order.OrderStatus,
-                TotalCost = order.TotalCost,
-                OrderDate = order.OrderDate
-            };
-        }
+        //public OrderPresentationModel MapToModel(Order order, Customer customer)
+        //{
+        //    return new OrderPresentationModel
+        //    {
+        //        Id = order.Id,
+        //        CustomerName = customer.Name,
+        //        CustomerAddress = customer.Address,
+        //        OrderStatus = order.OrderStatus,
+        //        TotalCost = order.TotalCost,
+        //        OrderDate = order.OrderDate
+        //    };
+        //}
     }
 }

@@ -11,15 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Dal.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Dal.Implementation", "WebApplicationTestTask.Dal.Implementation\WebApplicationTestTask.Dal.Implementation.csproj", "{8C47AE83-1DEC-4BDD-95C8-31F833310C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTestTask.Models", "WebApplicationTestTask.Models\WebApplicationTestTask.Models.csproj", "{A472419D-55B6-4209-A098-21FA328C6106}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Models", "WebApplicationTestTask.Models\WebApplicationTestTask.Models.csproj", "{A472419D-55B6-4209-A098-21FA328C6106}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTestTask.Bl.Abstraction", "WebApplicationTestTask.Bl.Abstraction\WebApplicationTestTask.Bl.Abstraction.csproj", "{DBDB8936-96FE-4DC8-B726-CF325BA72731}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Bl.Abstraction", "WebApplicationTestTask.Bl.Abstraction\WebApplicationTestTask.Bl.Abstraction.csproj", "{DBDB8936-96FE-4DC8-B726-CF325BA72731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTestTask.Bl.Implementation", "WebApplicationTestTask.Bl.Implementation\WebApplicationTestTask.Bl.Implementation.csproj", "{6C5E8874-F221-4C93-8438-1AD6A39525E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Bl.Implementation", "WebApplicationTestTask.Bl.Implementation\WebApplicationTestTask.Bl.Implementation.csproj", "{6C5E8874-F221-4C93-8438-1AD6A39525E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTestTask.Mappers.Abstraction", "WebApplicationTestTask.Mappers.Abstraction\WebApplicationTestTask.Mappers.Abstraction.csproj", "{6371414E-8C71-450F-B872-9289EA2FE9F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Mappers.Abstraction", "WebApplicationTestTask.Mappers.Abstraction\WebApplicationTestTask.Mappers.Abstraction.csproj", "{6371414E-8C71-450F-B872-9289EA2FE9F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTestTask.Mappers.Implementation", "WebApplicationTestTask.Mappers.Implementation\WebApplicationTestTask.Mappers.Implementation.csproj", "{6CB8979E-E645-4B2D-9A62-A4CAD9BD3D9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTestTask.Mappers.Implementation", "WebApplicationTestTask.Mappers.Implementation\WebApplicationTestTask.Mappers.Implementation.csproj", "{6CB8979E-E645-4B2D-9A62-A4CAD9BD3D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTestTask.Tests", "WebApplicationTestTask.Tests\WebApplicationTestTask.Tests.csproj", "{1E674B0D-F4B6-4670-84BB-9958CEC3EB85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{6CB8979E-E645-4B2D-9A62-A4CAD9BD3D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CB8979E-E645-4B2D-9A62-A4CAD9BD3D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CB8979E-E645-4B2D-9A62-A4CAD9BD3D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E674B0D-F4B6-4670-84BB-9958CEC3EB85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E674B0D-F4B6-4670-84BB-9958CEC3EB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E674B0D-F4B6-4670-84BB-9958CEC3EB85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E674B0D-F4B6-4670-84BB-9958CEC3EB85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,6 +20,7 @@ namespace WebApplicationTestTask.Dal.Implementation
             modelBuilder.Entity<OrderProduct>().Property(op => op.Price).HasPrecision(18, 2);
 
             modelBuilder.Entity<Product>().Property(pr => pr.Price).HasPrecision(18, 2);
+
             modelBuilder.Entity<Order>().Property(tc => tc.TotalCost).HasPrecision(18, 2);
 
             modelBuilder.Entity<OrderProduct>()
@@ -36,6 +37,9 @@ namespace WebApplicationTestTask.Dal.Implementation
                         .HasOne<Customer>(o => o.Customer)
                         .WithMany(c => c.Orders)
                         .HasForeignKey(o => o.CustomerId);
+
+            modelBuilder.Entity<Customer>().Property(c => c.Name).IsRequired();
+            modelBuilder.Entity<Customer>().Property(c => c.Address).IsRequired();
 
             modelBuilder.SeedDatabase();
         }

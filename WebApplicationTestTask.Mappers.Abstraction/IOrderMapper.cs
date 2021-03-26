@@ -10,6 +10,6 @@ namespace WebApplicationTestTask.Mappers.Abstraction
 {
     public interface IOrderMapper : IMapFromModel<OrderCreationalModel, Order>, IMapForUpdate<OrderUpdateModel, Order>
     {
-        OrderPresentationModel MapToModel(Order order, Customer customer);
+        //OrderPresentationModel MapToModel(Order order, Customer customer);
     }
 }
